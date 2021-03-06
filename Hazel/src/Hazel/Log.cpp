@@ -1,5 +1,4 @@
 #include "Log.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
 
 namespace Hazel
 {
@@ -10,7 +9,7 @@ namespace Hazel
 	{
 		spdlog::set_pattern("%^[%T] %n: %v%$");
 		sCoreLogger = spdlog::stdout_color_mt("Hazel");
-		sCoreLogger->set_level(spdlog::level::level_enum::trace);
+		sCoreLogger->set_level(spdlog::level::level_enum::info);
 		sClientLogger = spdlog::stdout_color_mt("Client");
 	}
 }

@@ -28,6 +28,11 @@ project "Hazel"
         "%{prj.name}/vendor/spdlog/include"
     }
 
+    postbuildcommands
+    {
+        ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+    }
+
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
@@ -39,24 +44,18 @@ project "Hazel"
             "HAZEL_PLATFORM_WINDOWS"
         }
 
-        postbuildcommands
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-        }
-
-    filter "system:unix"
+    filter "system:linux"
         cppdialect "C++17"
         staticruntime "On"
 
         defines
         {
-            "HAZEL_BUILD_DLL",
             "HAZEL_PLATFORM_UNIX"
         }
 
-        postbuildcommands
+        buildoptions 
         {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+            "-fPIC"
         }
 
     filter "configurations:Debug"
@@ -102,7 +101,7 @@ project "Sandbox"
             "HAZEL_PLATFORM_WINDOWS"
         }
 
-    filter "system:unix"
+    filter "system:linux"
         cppdialect "C++17"
         staticruntime "On"
 

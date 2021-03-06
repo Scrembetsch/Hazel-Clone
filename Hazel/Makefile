@@ -32,29 +32,29 @@ define PRELINKCMDS
 endef
 
 ifeq ($(config),debug)
-TARGETDIR = ../bin/Debug-windows-x86_64/Hazel
-TARGET = $(TARGETDIR)/Hazel.dll
-OBJDIR = ../bin-int/Debug-windows-x86_64/Hazel
-DEFINES += -DHAZEL_BUILD_DLL -DHAZEL_PLATFORM_WINDOWS -DHAZEL_DEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++17
-ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,--out-implib="../bin/Debug-windows-x86_64/Hazel/Hazel.lib"
+TARGETDIR = ../bin/Debug-linux-x86_64/Hazel
+TARGET = $(TARGETDIR)/libHazel.so
+OBJDIR = ../bin-int/Debug-linux-x86_64/Hazel
+DEFINES += -DHAZEL_PLATFORM_UNIX -DHAZEL_DEBUG
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC -g -fPIC
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC -g -std=c++17 -fPIC
+ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,-soname=libHazel.so
 define POSTBUILDCMDS
 	@echo Running postbuild commands
-	IF EXIST ..\bin\Debug-windows-x86_64\Hazel\Hazel.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Hazel\Hazel.dll ..\bin\Debug-windows-x86_64\Sandbox > nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Hazel\Hazel.dll ..\bin\Debug-windows-x86_64\Sandbox > nul)
+	cp -rf ../bin/Debug-linux-x86_64/Hazel/libHazel.so ../bin/Debug-linux-x86_64/Sandbox
 endef
 
 else ifeq ($(config),release)
-TARGETDIR = ../bin/Release-windows-x86_64/Hazel
-TARGET = $(TARGETDIR)/Hazel.dll
-OBJDIR = ../bin-int/Release-windows-x86_64/Hazel
-DEFINES += -DHAZEL_BUILD_DLL -DHAZEL_PLATFORM_WINDOWS -DHAZEL_RELEASE
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++17
-ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,--out-implib="../bin/Release-windows-x86_64/Hazel/Hazel.lib" -s
+TARGETDIR = ../bin/Release-linux-x86_64/Hazel
+TARGET = $(TARGETDIR)/libHazel.so
+OBJDIR = ../bin-int/Release-linux-x86_64/Hazel
+DEFINES += -DHAZEL_PLATFORM_UNIX -DHAZEL_RELEASE
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -fPIC
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -std=c++17 -fPIC
+ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,-soname=libHazel.so -s
 define POSTBUILDCMDS
 	@echo Running postbuild commands
-	IF EXIST ..\bin\Release-windows-x86_64\Hazel\Hazel.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Hazel\Hazel.dll ..\bin\Release-windows-x86_64\Sandbox > nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Hazel\Hazel.dll ..\bin\Release-windows-x86_64\Sandbox > nul)
+	cp -rf ../bin/Release-linux-x86_64/Hazel/libHazel.so ../bin/Release-linux-x86_64/Sandbox
 endef
 
 endif

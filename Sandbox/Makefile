@@ -32,26 +32,26 @@ define POSTBUILDCMDS
 endef
 
 ifeq ($(config),debug)
-TARGETDIR = ../bin/Debug-windows-x86_64/Sandbox
-TARGET = $(TARGETDIR)/Sandbox.exe
-OBJDIR = ../bin-int/Debug-windows-x86_64/Sandbox
-DEFINES += -DHAZEL_PLATFORM_WINDOWS -DHAZEL_DEBUG
+TARGETDIR = ../bin/Debug-linux-x86_64/Sandbox
+TARGET = $(TARGETDIR)/Sandbox
+OBJDIR = ../bin-int/Debug-linux-x86_64/Sandbox
+DEFINES += -DHAZEL_PLATFORM_UNIX -DHAZEL_DEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++17
-LIBS += ../bin/Debug-windows-x86_64/Hazel/Hazel.lib
-LDDEPS += ../bin/Debug-windows-x86_64/Hazel/Hazel.lib
-ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
+LIBS += ../bin/Debug-linux-x86_64/Hazel/libHazel.so
+LDDEPS += ../bin/Debug-linux-x86_64/Hazel/libHazel.so
+ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -Wl,-rpath,'$$ORIGIN/../Hazel' -m64
 
 else ifeq ($(config),release)
-TARGETDIR = ../bin/Release-windows-x86_64/Sandbox
-TARGET = $(TARGETDIR)/Sandbox.exe
-OBJDIR = ../bin-int/Release-windows-x86_64/Sandbox
-DEFINES += -DHAZEL_PLATFORM_WINDOWS -DHAZEL_RELEASE
+TARGETDIR = ../bin/Release-linux-x86_64/Sandbox
+TARGET = $(TARGETDIR)/Sandbox
+OBJDIR = ../bin-int/Release-linux-x86_64/Sandbox
+DEFINES += -DHAZEL_PLATFORM_UNIX -DHAZEL_RELEASE
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++17
-LIBS += ../bin/Release-windows-x86_64/Hazel/Hazel.lib
-LDDEPS += ../bin/Release-windows-x86_64/Hazel/Hazel.lib
-ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
+LIBS += ../bin/Release-linux-x86_64/Hazel/libHazel.so
+LDDEPS += ../bin/Release-linux-x86_64/Hazel/libHazel.so
+ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -Wl,-rpath,'$$ORIGIN/../Hazel' -m64 -s
 
 endif
 
