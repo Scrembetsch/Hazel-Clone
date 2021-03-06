@@ -14,7 +14,7 @@ namespace Hazel
 	{
 		while (true)
 		{
-
+			bool t = true;
 		}
 	}
 }
