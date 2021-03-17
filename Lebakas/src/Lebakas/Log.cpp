@@ -1,6 +1,6 @@
 #include "Log.h"
 
-namespace Hazel
+namespace Lebakas
 {
 	std::shared_ptr<spdlog::logger> Log::sCoreLogger;
 	std::shared_ptr<spdlog::logger> Log::sClientLogger;

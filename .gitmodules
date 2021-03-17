@@ -1,3 +1,3 @@
-[submodule "Hazel/vendor/spdlog"]
-	path = Hazel/vendor/spdlog
+[submodule "Lebakas/vendor/spdlog"]
+	path = Lebakas/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git

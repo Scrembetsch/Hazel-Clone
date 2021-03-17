@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Lebakas">
+      <UniqueIdentifier>{7814C7D0-E4F3-456C-ED0B-D142596AACCD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Lebakas.h" />
+    <ClInclude Include="src\Lebakas\Application.h">
+      <Filter>Lebakas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lebakas\Core.h">
+      <Filter>Lebakas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lebakas\Entrypoint.h">
+      <Filter>Lebakas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lebakas\Log.h">
+      <Filter>Lebakas</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Lebakas\Application.cpp">
+      <Filter>Lebakas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lebakas\Log.cpp">
+      <Filter>Lebakas</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,6 +1,6 @@
-#include <Hazel.h>
+#include <Lebakas.h>
 
-class Sandbox : public Hazel::Application
+class Sandbox : public Lebakas::Application
 {
 public:
 	Sandbox()
@@ -12,7 +12,7 @@ public:
 	}
 };
 
-Hazel::Application* Hazel::CreateApplication()
+Lebakas::Application* Lebakas::CreateApplication()
 {
 	return new Sandbox();
 }

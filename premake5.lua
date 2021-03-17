@@ -1,4 +1,4 @@
-workspace "Hazel"
+workspace "Lebakas"
     architecture 'x64'
 
     configurations
@@ -9,8 +9,8 @@ workspace "Hazel"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "Hazel"
-    location "Hazel"
+project "Lebakas"
+    location "Lebakas"
     kind "SharedLib"
     language "C++"
 
@@ -40,8 +40,8 @@ project "Hazel"
 
         defines
         {
-            "HAZEL_BUILD_DLL",
-            "HAZEL_PLATFORM_WINDOWS"
+            "LEBAKAS_BUILD_DLL",
+            "LEBAKAS_PLATFORM_WINDOWS"
         }
 
     filter "system:linux"
@@ -50,7 +50,7 @@ project "Hazel"
 
         defines
         {
-            "HAZEL_PLATFORM_UNIX"
+            "LEBAKAS_PLATFORM_UNIX"
         }
 
         buildoptions 
@@ -59,11 +59,11 @@ project "Hazel"
         }
 
     filter "configurations:Debug"
-        defines "HAZEL_DEBUG"
+        defines "LEBAKAS_DEBUG"
         symbols "On"
 
     filter "configurations:Release"
-        defines "HAZEL_RELEASE"
+        defines "LEBAKAS_RELEASE"
         optimize "On"
 
 project "Sandbox"
@@ -82,13 +82,13 @@ project "Sandbox"
 
     includedirs
     {
-        "Hazel/vendor/spdlog/include",
-        "Hazel/src"
+        "Lebakas/vendor/spdlog/include",
+        "Lebakas/src"
     }
 
     links
     {
-        "Hazel"
+        "Lebakas"
     }
 
     filter "system:windows"
@@ -98,7 +98,7 @@ project "Sandbox"
 
         defines
         {
-            "HAZEL_PLATFORM_WINDOWS"
+            "LEBAKAS_PLATFORM_WINDOWS"
         }
 
     filter "system:linux"
@@ -107,13 +107,13 @@ project "Sandbox"
 
         defines
         {
-            "HAZEL_PLATFORM_UNIX"
+            "LEBAKAS_PLATFORM_UNIX"
         }
 
     filter "configurations:Debug"
-        defines "HAZEL_DEBUG"
+        defines "LEBAKAS_DEBUG"
         symbols "On"
 
     filter "configurations:Release"
-        defines "HAZEL_RELEASE"
+        defines "LEBAKAS_RELEASE"
         optimize "On"

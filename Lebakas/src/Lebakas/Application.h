@@ -2,9 +2,9 @@
 
 #include "Core.h"
 
-namespace Hazel
+namespace Lebakas
 {
-	class HAZEL_API Application
+	class LEBAKAS_API Application
 	{
 	public:
 		Application();
