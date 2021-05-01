@@ -1,3 +1,4 @@
 [submodule "Lebakas/vendor/spdlog"]
 	path = Lebakas/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+

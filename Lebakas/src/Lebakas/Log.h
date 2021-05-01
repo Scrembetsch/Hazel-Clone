@@ -36,15 +36,15 @@ namespace Lebakas
 }
 
 // Core loggers
-#define LEBAKAS_CORE_CRITICAL(...)::Lebakas::Log::GetCoreLogger()->critical(__VA_ARGS__)
-#define LEBAKAS_CORE_ERROR(...)	::Lebakas::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define LEBAKAS_CORE_WARN(...)	::Lebakas::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define LEBAKAS_CORE_INFO(...)	::Lebakas::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define LEBAKAS_CORE_TRACE(...)	::Lebakas::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define LEBAKAS_CORE_CRITICAL(...)	::Lebakas::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#define LEBAKAS_CORE_ERROR(...)		::Lebakas::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define LEBAKAS_CORE_WARN(...)		::Lebakas::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define LEBAKAS_CORE_INFO(...)		::Lebakas::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define LEBAKAS_CORE_TRACE(...)		::Lebakas::Log::GetCoreLogger()->trace(__VA_ARGS__)
 
 // Client loggers
 #define LEBAKAS_CRITICAL(...)		::Lebakas::Log::GetClientLogger()->critical(__VA_ARGS__)
-#define LEBAKAS_ERROR(...)		::Lebakas::Log::GetClientLogger()->error(__VA_ARGS__)
+#define LEBAKAS_ERROR(...)			::Lebakas::Log::GetClientLogger()->error(__VA_ARGS__)
 #define LEBAKAS_WARN(...)			::Lebakas::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define LEBAKAS_INFO(...)			::Lebakas::Log::GetClientLogger()->info(__VA_ARGS__)
-#define LEBAKAS_TRACE(...)		::Lebakas::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define LEBAKAS_TRACE(...)			::Lebakas::Log::GetClientLogger()->trace(__VA_ARGS__)

@@ -19,6 +19,14 @@
     <ClInclude Include="src\Lebakas\Log.h">
       <Filter>Lebakas</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lebakas\WindowManager.h">
+      <Filter>Lebakas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lebakas\Time.h">
+      <Filter>Lebakas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lebakas\Input.h" />
+    <ClInclude Include="src\Lebakas\Event.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lebakas\Application.cpp">
@@ -27,5 +35,13 @@
     <ClCompile Include="src\Lebakas\Log.cpp">
       <Filter>Lebakas</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lebakas\WindowManager.cpp">
+      <Filter>Lebakas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lebakas\Time.cpp">
+      <Filter>Lebakas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lebakas\Input.cpp" />
+    <ClCompile Include="src\Lebakas\Event.cpp" />
   </ItemGroup>
 </Project>

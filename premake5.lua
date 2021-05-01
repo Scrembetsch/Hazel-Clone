@@ -25,7 +25,8 @@ project "Lebakas"
 
     includedirs
     {
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "vendor/SFML/include"
     }
 
     postbuildcommands
@@ -42,6 +43,26 @@ project "Lebakas"
         {
             "LEBAKAS_BUILD_DLL",
             "LEBAKAS_PLATFORM_WINDOWS"
+        }
+
+        libdirs
+        {
+            "vendor/SFML/lib"
+        }
+    
+        links
+        {
+            "opengl32.lib",
+            "freetype.lib",
+            "winmm.lib",
+            "gdi32.lib",
+            "openal32.lib",
+            "flac.lib",
+            "vorbisenc.lib",
+            "vorbisfile.lib",
+            "vorbis.lib",
+            "ogg.lib",
+            "ws2_32.lib"
         }
 
     filter "system:linux"
@@ -62,9 +83,27 @@ project "Lebakas"
         defines "LEBAKAS_DEBUG"
         symbols "On"
 
+        links
+        {
+            "sfml-audio-d.lib",
+            "sfml-graphics-d.lib",
+            "sfml-network-d.lib",
+            "sfml-system-d.lib",
+            "sfml-window-d.lib"
+        }
+
     filter "configurations:Release"
         defines "LEBAKAS_RELEASE"
         optimize "On"
+
+        links
+        {
+            "sfml-audio.lib",
+            "sfml-graphics.lib",
+            "sfml-network.lib",
+            "sfml-system.lib",
+            "sfml-window.lib"
+        }
 
 project "Sandbox"
     location "Sandbox"
@@ -83,12 +122,18 @@ project "Sandbox"
     includedirs
     {
         "Lebakas/vendor/spdlog/include",
-        "Lebakas/src"
+        "Lebakas/src",
+        "vendor/SFML/include"
     }
 
     links
     {
         "Lebakas"
+    }
+
+    postbuildcommands
+    {
+        ("{COPY} ../vendor/SFML/bin/ ../bin/" .. outputdir .. "/Sandbox")
     }
 
     filter "system:windows"
@@ -99,6 +144,11 @@ project "Sandbox"
         defines
         {
             "LEBAKAS_PLATFORM_WINDOWS"
+        }
+
+        libdirs
+        {
+            "vendor/SFML/lib"
         }
 
     filter "system:linux"
@@ -114,6 +164,24 @@ project "Sandbox"
         defines "LEBAKAS_DEBUG"
         symbols "On"
 
+        links
+        {
+            "sfml-audio-d.lib",
+            "sfml-graphics-d.lib",
+            "sfml-network-d.lib",
+            "sfml-system-d.lib",
+            "sfml-window-d.lib"
+        }
+
     filter "configurations:Release"
         defines "LEBAKAS_RELEASE"
         optimize "On"
+
+        links
+        {
+            "sfml-audio.lib",
+            "sfml-graphics.lib",
+            "sfml-network.lib",
+            "sfml-system.lib",
+            "sfml-window.lib"
+        }

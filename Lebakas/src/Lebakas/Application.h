@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "WindowManager.h"
 
 namespace Lebakas
 {
@@ -11,6 +12,12 @@ namespace Lebakas
 		virtual ~Application();
 
 		void Run();
+		void ProcessInput();
+
+		virtual void Update(float deltaTime);
+
+	protected:
+		WindowManager mRenderer;
 	};
 
 	// Define in client
