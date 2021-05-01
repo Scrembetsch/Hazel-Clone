@@ -12,12 +12,24 @@ namespace Lebakas
 		virtual ~Application();
 
 		void Run();
-		void ProcessInput();
 
+		/// <summary>
+		/// Update Function -> override to receive update call every fixed time step
+		/// </summary>
+		/// <param name="deltaTime">Time since last update</param>
 		virtual void Update(double deltaTime);
 
 	protected:
+		/// <summary>
+		/// Window Manager that uses SFML to render
+		/// </summary>
 		WindowManager mRenderer;
+
+	private:
+		/// <summary>
+		/// Collects all events from window manager and edits entries in Device::Input
+		/// </summary>
+		void ProcessInput();
 	};
 
 	// Define in client

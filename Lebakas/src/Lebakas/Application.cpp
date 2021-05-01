@@ -19,7 +19,7 @@ namespace Lebakas
 	{
 		Device::Input::Update();
 		Event event;
-		while ((event = mRenderer.GetLatestEvent()).EventType != Event::NONE)
+		while ((event = mRenderer.PollEvent()).EventType != Event::NONE)
 		{
 			switch (event.EventType)
 			{

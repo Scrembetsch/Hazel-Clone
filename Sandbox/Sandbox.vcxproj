@@ -101,12 +101,27 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CircleEntityGenerator.cpp" />
+    <ClCompile Include="src\ColorPicker.cpp" />
+    <ClCompile Include="src\MovingCircleEntity.cpp" />
+    <ClCompile Include="src\RandomNumberGenerator.cpp" />
     <ClCompile Include="src\Sandbox.cpp" />
+    <ClCompile Include="src\StatsEntity.cpp" />
+    <ClCompile Include="src\VectorMath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lebakas\Lebakas.vcxproj">
       <Project>{7814C7D0-E4F3-456C-ED0B-D142596AACCD}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CircleEntityGenerator.h" />
+    <ClInclude Include="src\ColorPicker.h" />
+    <ClInclude Include="src\Entity.h" />
+    <ClInclude Include="src\MovingCircleEntity.h" />
+    <ClInclude Include="src\RandomNumberGenerator.h" />
+    <ClInclude Include="src\StatsEntity.h" />
+    <ClInclude Include="src\VectorMath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

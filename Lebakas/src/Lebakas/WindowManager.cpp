@@ -30,7 +30,7 @@ std::uint32_t WindowManager::GetWindowWidth() const
 	return mWindow->getSize().x;
 }
 
-Event WindowManager::GetLatestEvent()
+Event WindowManager::PollEvent()
 {
 	sf::Event sfEvent;
 	if (mWindow->pollEvent(sfEvent))

@@ -3,6 +3,9 @@
 #include "Core.h"
 #include "Input.h"
 
+/// <summary>
+/// Wrapper for sfml events
+/// </summary>
 class LEBAKAS_API Event
 {
 public:

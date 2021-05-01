@@ -5,6 +5,7 @@
 
 namespace Device
 {
+    // static Input class that stores the state of each key in the current fixed update
 	class LEBAKAS_API Input
 	{
     public:

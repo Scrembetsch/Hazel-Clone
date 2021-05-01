@@ -1,16 +1,27 @@
 #include <Lebakas.h>
 #include "Lebakas/Time.h"
+#include "Entity.h"
+#include "CircleEntityGenerator.h"
+#include "StatsEntity.h"
 
 class Sandbox : public Lebakas::Application
 {
 public:
 	Sandbox()
 		: Application()
-		, mCircle(30)
-		, mMoveSpeed(100)
 	{
-		mCircle.setPosition(50, 50);
-		mRenderer.AddDrawable(&mCircle);
+		unsigned int entities = 1000;
+		mBounds = sf::Rect<float>(0.0f, 0.0f, mRenderer.GetWindowWidth(), mRenderer.GetWindowHeight());
+		for (unsigned int i = 0; i < entities; ++i)
+		{
+			mEntities.emplace_back(CircleEntityGenerator::generateInBounds(mBounds));
+		}
+
+		for (auto it = mEntities.begin(); it != mEntities.end(); it++)
+		{
+			mRenderer.AddDrawable(&((*it)->mShape));
+		}
+		mRenderer.AddDrawable(&(mStats.Stats));
 	}
 
 	~Sandbox()
@@ -19,25 +30,7 @@ public:
 
 	virtual void Update(double deltaTime)
 	{
-		LEBAKAS_INFO(deltaTime);
-		sf::Vector2f newPos = mCircle.getPosition();
-		if(Device::Input::IsKeyDown(Device::Input::Key::A))
-		{
-			newPos.x -= deltaTime * mMoveSpeed;
-		}
-		if (Device::Input::IsKeyDown(Device::Input::Key::D))
-		{
-			newPos.x += deltaTime * mMoveSpeed;
-		}
-		if (Device::Input::IsKeyDown(Device::Input::Key::W))
-		{
-			newPos.y -= deltaTime * mMoveSpeed;
-		}
-		if (Device::Input::IsKeyDown(Device::Input::Key::S))
-		{
-			newPos.y += deltaTime * mMoveSpeed;
-		}
-
+		//LEBAKAS_INFO(deltaTime);
 		if (Device::Input::WasKeyPressed(Device::Input::Key::Up))
 		{
 			Time::SetFixedFps(Time::GetFixedFps() + 5);
@@ -49,14 +42,16 @@ public:
 				Time::SetFixedFps(Time::GetFixedFps() - 5);
 			}
 		}
-
-		newPos.x = std::clamp(newPos.x, 0.0f, mRenderer.GetWindowWidth() - mCircle.getRadius() * 2);
-		newPos.y = std::clamp(newPos.y, 0.0f, mRenderer.GetWindowHeight() - mCircle.getRadius() * 2);
-		mCircle.setPosition(newPos);
+		for (auto entity : mEntities)
+		{
+			entity->update(deltaTime);
+		}
+		mStats.update(deltaTime);
 	}
 
-	sf::CircleShape mCircle;
-	double mMoveSpeed;
+	sf::Rect<float> mBounds;
+	std::vector<MovingCircleEntity*> mEntities;
+	StatsEntity mStats;
 };
 
 Lebakas::Application* Lebakas::CreateApplication()
