@@ -1,4 +1,5 @@
 #include "Time.h"
+#include "Log.h"
 #include <cmath>
 
 void Time::Init()
@@ -16,7 +17,8 @@ double Time::GetTimeSinceStartup()
 void Time::SetFixedFps(std::uint32_t fps)
 {
 	FixedFps = fps;
-	FixedTimeTime = 1.0 / static_cast<double>(FixedFps);
+	FixedFrameTime = 1.0 / static_cast<double>(FixedFps);
+	LEBAKAS_CORE_INFO("Changed FPS Target to: " + std::to_string(fps));
 }
 
 void Time::SetFixedFrameTime(double frameTime)
@@ -31,7 +33,7 @@ std::uint32_t Time::GetFixedFps()
 
 double Time::GetFixedFrameTime()
 {
-	return FixedTimeTime;
+	return FixedFrameTime;
 }
 
 void Time::SetDeltaTime(double deltaTime)

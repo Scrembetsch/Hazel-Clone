@@ -13,6 +13,9 @@ public:
 	bool IsWindowOpen();
 	void CloseWindow();
 
+	std::uint32_t GetWindowHeight() const;
+	std::uint32_t GetWindowWidth() const;
+
 	Event GetLatestEvent();
 
 	void Render();

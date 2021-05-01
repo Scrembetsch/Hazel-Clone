@@ -20,6 +20,16 @@ void WindowManager::CloseWindow()
 	mWindow->close();
 }
 
+std::uint32_t WindowManager::GetWindowHeight() const
+{
+	return mWindow->getSize().y;
+}
+
+std::uint32_t WindowManager::GetWindowWidth() const
+{
+	return mWindow->getSize().x;
+}
+
 Event WindowManager::GetLatestEvent()
 {
 	sf::Event sfEvent;

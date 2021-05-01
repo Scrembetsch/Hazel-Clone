@@ -21,6 +21,6 @@ public:
 private:
 	inline static Clock::time_point StartTime;
 	inline static std::uint32_t FixedFps;
-	inline static double FixedTimeTime;
+	inline static double FixedFrameTime;
 	inline static double DeltaTime;
 };

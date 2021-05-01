@@ -1,4 +1,5 @@
 #include <Lebakas.h>
+#include "Lebakas/Time.h"
 
 class Sandbox : public Lebakas::Application
 {
@@ -16,27 +17,42 @@ public:
 	{
 	}
 
-	virtual void Update(float deltaTime)
+	virtual void Update(double deltaTime)
 	{
-		sf::Vector2f move(0, 0);
+		LEBAKAS_INFO(deltaTime);
+		sf::Vector2f newPos = mCircle.getPosition();
 		if(Device::Input::IsKeyDown(Device::Input::Key::A))
 		{
-			move.x -= deltaTime * mMoveSpeed;
+			newPos.x -= deltaTime * mMoveSpeed;
 		}
 		if (Device::Input::IsKeyDown(Device::Input::Key::D))
 		{
-			move.x += deltaTime * mMoveSpeed;
+			newPos.x += deltaTime * mMoveSpeed;
 		}
 		if (Device::Input::IsKeyDown(Device::Input::Key::W))
 		{
-			move.y -= deltaTime * mMoveSpeed;
+			newPos.y -= deltaTime * mMoveSpeed;
 		}
 		if (Device::Input::IsKeyDown(Device::Input::Key::S))
 		{
-			move.y += deltaTime * mMoveSpeed;
+			newPos.y += deltaTime * mMoveSpeed;
 		}
 
-		mCircle.setPosition(mCircle.getPosition() + move);
+		if (Device::Input::WasKeyPressed(Device::Input::Key::Up))
+		{
+			Time::SetFixedFps(Time::GetFixedFps() + 5);
+		}
+		else if (Device::Input::WasKeyPressed(Device::Input::Key::Down))
+		{
+			if (Time::GetFixedFps() >= 6)
+			{
+				Time::SetFixedFps(Time::GetFixedFps() - 5);
+			}
+		}
+
+		newPos.x = std::clamp(newPos.x, 0.0f, mRenderer.GetWindowWidth() - mCircle.getRadius() * 2);
+		newPos.y = std::clamp(newPos.y, 0.0f, mRenderer.GetWindowHeight() - mCircle.getRadius() * 2);
+		mCircle.setPosition(newPos);
 	}
 
 	sf::CircleShape mCircle;

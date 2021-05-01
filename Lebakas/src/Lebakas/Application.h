@@ -14,7 +14,7 @@ namespace Lebakas
 		void Run();
 		void ProcessInput();
 
-		virtual void Update(float deltaTime);
+		virtual void Update(double deltaTime);
 
 	protected:
 		WindowManager mRenderer;
