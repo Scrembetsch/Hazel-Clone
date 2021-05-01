@@ -15,8 +15,8 @@ public:
 	
 	sf::CircleShape mShape;
 private:
-	sf::Vector2f _velocity;
+	sf::Vector2f mVelocity;
 
-	std::vector<std::pair<sf::Vector2f, float>> _bounds;
+	std::vector<std::pair<sf::Vector2f, float>> mBounds;
 };
 

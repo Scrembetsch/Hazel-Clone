@@ -26,6 +26,11 @@ public:
 	/// </summary>
 	/// <param name="frameTime"></param>
 	static void SetFixedFrameTime(double frameTime);
+	/// <summary>
+	/// Sets targeted frame rate, 0 = unlimited
+	/// </summary>
+	/// <param name="fps"></param>
+	static void SetVSyncFps(std::uint32_t fps = 0);
 
 	/// <summary>
 	/// Returns fixed fps
@@ -38,6 +43,16 @@ public:
 	/// <returns></returns>
 	static double GetFixedFrameTime();
 
+	/// <summary>
+	/// Gets the targeted render FPS
+	/// </summary>
+	/// <returns></returns>
+	static std::uint32_t GetVSyncFps();
+	/// <summary>
+	/// Gets the targeted render frametime
+	/// </summary>
+	/// <returns></returns>
+	static double GetVSyncFrameTime();
 	/// <summary>
 	/// Sets the delta time (time since last render call)
 	/// </summary>
@@ -52,6 +67,8 @@ public:
 private:
 	inline static Clock::time_point StartTime;
 	inline static std::uint32_t FixedFps;
+	inline static std::uint32_t VSyncFps;
 	inline static double FixedFrameTime;
+	inline static double VSyncFrameTime;
 	inline static double DeltaTime;
 };

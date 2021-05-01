@@ -17,7 +17,7 @@ namespace Lebakas
 		/// Update Function -> override to receive update call every fixed time step
 		/// </summary>
 		/// <param name="deltaTime">Time since last update</param>
-		virtual void Update(double deltaTime);
+		virtual void FixedUpdate(double deltaTime);
 
 	protected:
 		/// <summary>

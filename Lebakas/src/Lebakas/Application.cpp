@@ -37,7 +37,7 @@ namespace Lebakas
 		}
 	}
 
-	void Application::Update(double deltaTime)
+	void Application::FixedUpdate(double deltaTime)
 	{
 	}
 
@@ -46,7 +46,8 @@ namespace Lebakas
 		double renderPrevious = Time::GetTimeSinceStartup();
 		double updatePrevious = Time::GetTimeSinceStartup();
 
-		double lag = 0.0;
+		double updateLag = 0.0;
+		double renderLag = 0.0;
 
 		while (mRenderer.IsWindowOpen())
 		{
@@ -54,21 +55,26 @@ namespace Lebakas
 			Time::SetDeltaTime(renderCurrent - renderPrevious);
 			renderPrevious = renderCurrent;
 
-			lag += Time::GetDeltaTime();
+			updateLag += Time::GetDeltaTime();
+			renderLag += Time::GetDeltaTime();
 
-			while (lag >= Time::GetFixedFrameTime())
+			while (updateLag >= Time::GetFixedFrameTime())
 			{
 				ProcessInput();
 
 				double updateCurrent = Time::GetTimeSinceStartup();
 
-				Update(updateCurrent - updatePrevious);
+				FixedUpdate(updateCurrent - updatePrevious);
 
 				updatePrevious = updateCurrent;
-				lag -= Time::GetFixedFrameTime();
+				updateLag -= Time::GetFixedFrameTime();
 			}
 
-			mRenderer.Render();
+			if (renderLag >= Time::GetVSyncFrameTime())
+			{
+				mRenderer.Render();
+				renderLag -= Time::GetVSyncFrameTime();
+			}
 		}
 	}
 }

@@ -4,14 +4,14 @@
 
 MovingCircleEntity::MovingCircleEntity(const sf::Vector2f& position, float radius, const sf::Color& color, const sf::Vector2f& velocity, const sf::Rect<float>& worldBounds)
 	: mShape()
-	, _velocity(velocity)
+	, mVelocity(velocity)
 {
 	mShape.setPosition(position);
 	mShape.setRadius(radius);
 	mShape.setFillColor(color);
 	// each entry represents the normal of a rectangle line (inwards facing) plus the line offset in normal direction
 	// order of line representations: top, right, bottom, left
-	_bounds = {
+	mBounds = {
 		std::make_pair(sf::Vector2f(0.f, 1.f), worldBounds.top + radius),
 		std::make_pair(sf::Vector2f(-1.f, 0.f), worldBounds.left + worldBounds.width - radius),
 		std::make_pair(sf::Vector2f(0.f, -1.f), worldBounds.top + worldBounds.height - radius),
@@ -23,10 +23,10 @@ void MovingCircleEntity::update(double dt)
 {
 	float seconds = dt;
 	// calculate the next position
-	auto nextPosition = mShape.getPosition() + _velocity * seconds;
+	auto nextPosition = mShape.getPosition() + mVelocity * seconds;
 
 	// check for a potential collision against all bounds
-	for (auto bound : _bounds)
+	for (auto bound : mBounds)
 	{
 		const sf::Vector3f l(bound.first.x, bound.first.y, bound.second - mShape.getRadius());
 		const sf::Vector3f p1(nextPosition.x, nextPosition.y, 1.f);
@@ -37,25 +37,25 @@ void MovingCircleEntity::update(double dt)
 		if (distance <= 0.f)
 		{
 			const sf::Vector3f p0(mShape.getPosition().x, mShape.getPosition().y, 1.f);
-			const sf::Vector3f v(_velocity.x, _velocity.y, 0.f);
+			const sf::Vector3f v(mVelocity.x, mVelocity.y, 0.f);
 
 			// calculate the exact time of collision
 			const auto t = -VectorMath::dot(l, p0) / VectorMath::dot(l, v);
 
 			// move the circle forward until it collides
-			mShape.setPosition(mShape.getPosition() + _velocity * t);
+			mShape.setPosition(mShape.getPosition() + mVelocity * t);
 
 			// calculate remaining time
 			seconds -= t;
 
 			// invert the movement direction
-			const auto reverse = -_velocity;
+			const auto reverse = -mVelocity;
 
 			// calculate the reflection vector and take it as the new velocity
-			_velocity = 2.f * VectorMath::dot(bound.first, reverse) * bound.first - reverse;
+			mVelocity = 2.f * VectorMath::dot(bound.first, reverse) * bound.first - reverse;
 
 			// for the remaining time, move into the new direction
-			nextPosition = mShape.getPosition() + _velocity * std::max(seconds, 0.f);
+			nextPosition = mShape.getPosition() + mVelocity * std::max(seconds, 0.f);
 
 			break;
 		}

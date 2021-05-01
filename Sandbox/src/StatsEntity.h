@@ -9,8 +9,8 @@ public:
 
 	void update(double dt);
 
-	sf::Text Stats;
+	sf::Text mStats;
 private:
-	sf::Font _font;
+	sf::Font mFont;
 };
 
