@@ -60,6 +60,6 @@ public:
 	void RemoveDrawable(sf::Drawable* drawable);
 
 private:
-	sf::RenderWindow* mWindow;
+	sf::RenderWindow mWindow;
 	std::vector<sf::Drawable*> mDrawObjects;
 };

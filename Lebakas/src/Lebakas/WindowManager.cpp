@@ -1,39 +1,38 @@
 #include "WindowManager.h"
 
 WindowManager::WindowManager(std::uint32_t width, std::uint32_t height, std::string title)
+	: mWindow(sf::VideoMode(width, height), title)
 {
-	mWindow = new sf::RenderWindow(sf::VideoMode(width, height), title);
 }
 
 WindowManager::~WindowManager()
 {
-	delete mWindow;
 }
 
 bool WindowManager::IsWindowOpen()
 {
-	return mWindow->isOpen();
+	return mWindow.isOpen();
 }
 
 void WindowManager::CloseWindow()
 {
-	mWindow->close();
+	mWindow.close();
 }
 
 std::uint32_t WindowManager::GetWindowHeight() const
 {
-	return mWindow->getSize().y;
+	return mWindow.getSize().y;
 }
 
 std::uint32_t WindowManager::GetWindowWidth() const
 {
-	return mWindow->getSize().x;
+	return mWindow.getSize().x;
 }
 
 Event WindowManager::PollEvent()
 {
 	sf::Event sfEvent;
-	if (mWindow->pollEvent(sfEvent))
+	if (mWindow.pollEvent(sfEvent))
 	{
 		switch (sfEvent.type)
 		{
@@ -79,10 +78,10 @@ void WindowManager::RemoveDrawable(sf::Drawable* drawable)
 
 void WindowManager::Render()
 {
-	mWindow->clear();
+	mWindow.clear();
 	for (auto it = mDrawObjects.begin(); it != mDrawObjects.end(); it++)
 	{
-		mWindow->draw(**it);
+		mWindow.draw(**it);
 	}
-	mWindow->display();
+	mWindow.display();
 }
